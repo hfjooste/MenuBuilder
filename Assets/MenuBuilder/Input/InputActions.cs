@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/Menu Builder/Input/InputActions.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/MenuBuilder/Input/InputActions.inputactions'
 
 using System;
 using System.Collections;
@@ -46,6 +46,14 @@ public class @InputActions : IInputActionCollection, IDisposable
                     ""name"": ""Cancel"",
                     ""type"": ""Button"",
                     ""id"": ""181636ce-5585-41cc-a790-e15bd9accef8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""Tabs"",
+                    ""type"": ""Button"",
+                    ""id"": ""9692b077-6dbf-4095-b3b7-12f4a72a6ef1"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Press""
@@ -359,6 +367,105 @@ public class @InputActions : IInputActionCollection, IDisposable
                     ""action"": ""Cancel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Q/E"",
+                    ""id"": ""efdeedfa-f8bb-4619-a2ba-1be8e56f0702"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Tabs"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""52512f76-dd9f-4fee-ae64-c96c9d75a922"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Tabs"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""ff8b90dc-2e00-406d-81eb-6a98434f88ea"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Tabs"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Page Up/Down"",
+                    ""id"": ""68271b4b-3636-4d46-b03e-29e762993cd6"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Tabs"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""a6cd96fe-b3f6-4dbb-b238-73bf6d816cfa"",
+                    ""path"": ""<Keyboard>/pageDown"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Tabs"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""b6595deb-54a2-48be-82dc-9901211b64fc"",
+                    ""path"": ""<Keyboard>/pageUp"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Tabs"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Triggers"",
+                    ""id"": ""719ade20-e5dc-4d29-b8c5-2417e86e2faf"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Tabs"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""6bb97a9d-b2a9-457f-8df8-dcea8cfab7d6"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Tabs"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""108659fc-b833-4b98-9ab9-8e12def6a423"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Tabs"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -394,6 +501,7 @@ public class @InputActions : IInputActionCollection, IDisposable
         m_Menu_Horizontal = m_Menu.FindAction("Horizontal", throwIfNotFound: true);
         m_Menu_Select = m_Menu.FindAction("Select", throwIfNotFound: true);
         m_Menu_Cancel = m_Menu.FindAction("Cancel", throwIfNotFound: true);
+        m_Menu_Tabs = m_Menu.FindAction("Tabs", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -447,6 +555,7 @@ public class @InputActions : IInputActionCollection, IDisposable
     private readonly InputAction m_Menu_Horizontal;
     private readonly InputAction m_Menu_Select;
     private readonly InputAction m_Menu_Cancel;
+    private readonly InputAction m_Menu_Tabs;
     public struct MenuActions
     {
         private @InputActions m_Wrapper;
@@ -455,6 +564,7 @@ public class @InputActions : IInputActionCollection, IDisposable
         public InputAction @Horizontal => m_Wrapper.m_Menu_Horizontal;
         public InputAction @Select => m_Wrapper.m_Menu_Select;
         public InputAction @Cancel => m_Wrapper.m_Menu_Cancel;
+        public InputAction @Tabs => m_Wrapper.m_Menu_Tabs;
         public InputActionMap Get() { return m_Wrapper.m_Menu; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -476,6 +586,9 @@ public class @InputActions : IInputActionCollection, IDisposable
                 @Cancel.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnCancel;
                 @Cancel.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnCancel;
                 @Cancel.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnCancel;
+                @Tabs.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnTabs;
+                @Tabs.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnTabs;
+                @Tabs.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnTabs;
             }
             m_Wrapper.m_MenuActionsCallbackInterface = instance;
             if (instance != null)
@@ -492,6 +605,9 @@ public class @InputActions : IInputActionCollection, IDisposable
                 @Cancel.started += instance.OnCancel;
                 @Cancel.performed += instance.OnCancel;
                 @Cancel.canceled += instance.OnCancel;
+                @Tabs.started += instance.OnTabs;
+                @Tabs.performed += instance.OnTabs;
+                @Tabs.canceled += instance.OnTabs;
             }
         }
     }
@@ -520,5 +636,6 @@ public class @InputActions : IInputActionCollection, IDisposable
         void OnHorizontal(InputAction.CallbackContext context);
         void OnSelect(InputAction.CallbackContext context);
         void OnCancel(InputAction.CallbackContext context);
+        void OnTabs(InputAction.CallbackContext context);
     }
 }

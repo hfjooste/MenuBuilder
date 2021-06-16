@@ -14,10 +14,10 @@ namespace ThirdPixelGames.MenuBuilder
         public bool active = true;
         
         /// <summary>
-        /// A boolean value indicating if the menu is horizontal (true) or vertical (false)
+        /// The type of menu (horizontal, vertical or tabs)
         /// </summary>
-        [Tooltip("A boolean value indicating if the menu is horizontal (true) or vertical (false)")]
-        public bool horizontalMenu;
+        [Tooltip("The type of menu (horizontal, vertical or tabs)")]
+        public MenuStyle menuStyle;
         
         /// <summary>
         /// A boolean value indicating if the menu supports wrap-around input
@@ -85,6 +85,8 @@ namespace ThirdPixelGames.MenuBuilder
             _input.onMenuRight.RemoveListener(OnMenuRight);
             _input.onMenuSelected.RemoveListener(OnMenuSelected);
             _input.onMenuCanceled.RemoveListener(OnMenuCanceled);
+            _input.onMenuTabLeft.RemoveListener(OnMenuTabLeft);
+            _input.onMenuTabRight.RemoveListener(OnMenuTabRight);
         }
 
         /// <summary>
@@ -102,12 +104,21 @@ namespace ThirdPixelGames.MenuBuilder
             _input.onMenuRight.AddListener(OnMenuRight);
             _input.onMenuSelected.AddListener(OnMenuSelected);
             _input.onMenuCanceled.AddListener(OnMenuCanceled);
+            _input.onMenuTabLeft.AddListener(OnMenuTabLeft);
+            _input.onMenuTabRight.AddListener(OnMenuTabRight);
 
             // Reset the selected index
             _selectedIndex = 0;
             
             // Update the menu items
             UpdateMenuItems();
+
+            // Check if we're using a tabbed menu
+            if (menuStyle == MenuStyle.Tabs)
+            {
+                // Select the item
+                OnMenuSelected();
+            }
         }
         #endregion
 
@@ -157,10 +168,10 @@ namespace ThirdPixelGames.MenuBuilder
         /// </summary>
         private void OnMenuUp()
         {
-            // Check if the menu is horizontal
-            if (horizontalMenu)
+            // Check if the menu is vertical
+            if (menuStyle != MenuStyle.Vertical)
             {
-                // Don't update the selection if we're using a horizontal menu
+                // Don't update the selection if we're not using a vertical menu
                 return;
             }
 
@@ -173,10 +184,10 @@ namespace ThirdPixelGames.MenuBuilder
         /// </summary>
         private void OnMenuDown()
         {
-            // Check if the menu is horizontal
-            if (horizontalMenu)
+            // Check if the menu is vertical
+            if (menuStyle != MenuStyle.Vertical)
             {
-                // Don't update the selection if we're using a horizontal menu
+                // Don't update the selection if we're not using a vertical menu
                 return;
             }
 
@@ -189,10 +200,10 @@ namespace ThirdPixelGames.MenuBuilder
         /// </summary>
         private void OnMenuLeft()
         {
-            // Check if the menu is vertical
-            if (!horizontalMenu)
+            // Check if the menu is horizontal
+            if (menuStyle != MenuStyle.Horizontal)
             {
-                // Don't update the selection if we're using a vertical menu
+                // Don't update the selection if we're not using a horizontal menu
                 return;
             }
 
@@ -205,15 +216,53 @@ namespace ThirdPixelGames.MenuBuilder
         /// </summary>
         private void OnMenuRight()
         {
-            // Check if the menu is vertical
-            if (!horizontalMenu)
+            // Check if the menu is horizontal
+            if (menuStyle != MenuStyle.Horizontal)
             {
-                // Don't update the selection if we're using a vertical menu
+                // Don't update the selection if we're not using a horizontal menu
                 return;
             }
 
             // Increase the selected index
             UpdateSelection(1);
+        }
+        
+        /// <summary>
+        /// Invoked after receiving a tab left event from the MenuInput component
+        /// </summary>
+        private void OnMenuTabLeft()
+        {
+            // Check if the menu is tabbed
+            if (menuStyle != MenuStyle.Tabs)
+            {
+                // Don't update the selection if we're not using a tabbed menu
+                return;
+            }
+
+            // Reduce the selected index
+            UpdateSelection(-1);
+            
+            // Select the item
+            OnMenuSelected();
+        }
+
+        /// <summary>
+        /// Invoked after receiving a tab right event from the MenuInput component
+        /// </summary>
+        private void OnMenuTabRight()
+        {
+            // Check if the menu is tabbed
+            if (menuStyle != MenuStyle.Tabs)
+            {
+                // Don't update the selection if we're not using a tabbed menu
+                return;
+            }
+
+            // Reduce the selected index
+            UpdateSelection(1);
+            
+            // Select the item
+            OnMenuSelected();
         }
 
         /// <summary>

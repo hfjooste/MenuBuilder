@@ -38,6 +38,16 @@ namespace ThirdPixelGames.MenuBuilder
         /// Invoked whenever we receive a canceled input event from the Input System
         /// </summary>
         [HideInInspector] public UnityEvent onMenuCanceled = new UnityEvent();
+        
+        /// <summary>
+        /// Invoked whenever we receive a tab left input event from the Input System
+        /// </summary>
+        [HideInInspector] public UnityEvent onMenuTabLeft = new UnityEvent();
+        
+        /// <summary>
+        /// Invoked whenever we receive a tab right input event from the Input System
+        /// </summary>
+        [HideInInspector] public UnityEvent onMenuTabRight = new UnityEvent();
         #endregion
 
         #region Private Variables
@@ -97,17 +107,20 @@ namespace ThirdPixelGames.MenuBuilder
             _input.Enable();
 
             // Monitor for input events received from the Input System
-            _input.Menu.Vertical.performed += input => OnMenuVerticalPerformed(input.ReadValue<float>());
-            _input.Menu.Horizontal.performed += input => OnMenuHorizontalPerformed(input.ReadValue<float>());
+            _input.Menu.Vertical.performed += input => InvokeEvent(onMenuDown, onMenuUp, input.ReadValue<float>());
+            _input.Menu.Horizontal.performed += input => InvokeEvent(onMenuLeft, onMenuRight, input.ReadValue<float>());
             _input.Menu.Select.performed += _ => onMenuSelected?.Invoke();
             _input.Menu.Cancel.performed += _ => onMenuCanceled?.Invoke();
+            _input.Menu.Tabs.performed += input => InvokeEvent(onMenuTabLeft, onMenuTabRight, input.ReadValue<float>());
         }
 
         /// <summary>
-        /// Invoke the correct vertical input event based on the input received from the Input System
+        /// Invoke the correct input event based on the input received from the Input System
         /// </summary>
+        /// <param name="negativeEvent">The event to invoke if we receive a negative input value</param>
+        /// <param name="positiveEvent">The event to invoke if we receive a positive input value</param>
         /// <param name="input">The input received from the Input System</param>
-        private void OnMenuVerticalPerformed(float input)
+        private void InvokeEvent(UnityEvent negativeEvent, UnityEvent positiveEvent, float input)
         {
             // Check if we have a value to process
             if (input == 0)
@@ -119,39 +132,13 @@ namespace ThirdPixelGames.MenuBuilder
             // Check for a positive value
             if (input > 0)
             {
-                // Invoke the menu up event
-                onMenuUp?.Invoke();
+                // Invoke the positive event
+                positiveEvent?.Invoke();
             }
             else
             {
-                // Invoke the menu down event
-                onMenuDown?.Invoke();
-            }
-        }
-
-        /// <summary>
-        /// Invoke the correct horizontal input event based on the input received from the Input System
-        /// </summary>
-        /// <param name="input">The input received from the Input System</param>
-        private void OnMenuHorizontalPerformed(float input)
-        {
-            // Check if we have a value to process
-            if (input == 0)
-            {
-                // Ignore the input if we don't have a value
-                return;
-            }
-
-            // Check for a positive value
-            if (input > 0)
-            {
-                // Invoke the menu right event
-                onMenuRight?.Invoke();
-            }
-            else
-            {
-                // Invoke the menu left event
-                onMenuLeft?.Invoke();
+                // Invoke the negative event
+                negativeEvent?.Invoke();
             }
         }
         #endregion
