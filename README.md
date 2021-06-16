@@ -59,6 +59,7 @@ This <b>Menu Input</b> component will read the input from the Unity Input System
         <ul>
             <li><b>Active:</b> A boolean value indicating if the menu can receive input events</li>
             <li><b>Menu Style:</b> The type of menu you're using (Vertical, Horizontal or Tabbed)</li>
+            <li><b>Reset Index After Loading:</b> Reset the selected index after loading the menu (or disabling and enabling it)</li>
             <li><b>Wrap Around:</b> Enable/disable the wrap-around feature when exceeding the start/end position of the menu</li>
             <li><b>Menu Items:</b> A list of all menu items managed by this menu</li>
         </ul>
