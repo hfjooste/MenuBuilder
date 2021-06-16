@@ -11,7 +11,7 @@ You are free to do whatever you want with this library. You're allowed to use th
 This tool allows you to create complex menus without writing a single line of code. It includes to following features
 <ol>
     <li>Keyboard and controller support using the Unity Input System</li>
-    <li>Vertical and Horizontal style menus</li>
+    <li>Vertical, Horizontal and Tabbed style menus</li>
     <li>Wrap-around when exceeding the start/end positions</li>
     <li>Activated, deactivated, selected and canceled events that can be handled inside the editor</li>
 </ol>
@@ -30,6 +30,7 @@ This library includes demo input actions that should be perfect for any game. If
         <ul>
             <li><b>Vertical</b> (1D Axis)</li>
             <li><b>Horizontal</b> (1D Axis composite)</li>
+            <li><b>Tabs</b> (1D Axis composite)</li>
             <li><b>Select</b> (Button binding)</li>
             <li><b>Cancel</b> (Button binding)</li>
         </ul>
@@ -57,7 +58,7 @@ This <b>Menu Input</b> component will read the input from the Unity Input System
         Set the properties of the menu
         <ul>
             <li><b>Active:</b> A boolean value indicating if the menu can receive input events</li>
-            <li><b>Horizontal Menu:</b> A boolean value indicating if the menu is horizontal (true) or vertical (false)</li>
+            <li><b>Menu Style:</b> The type of menu you're using (Vertical, Horizontal or Tabbed)</li>
             <li><b>Wrap Around:</b> Enable/disable the wrap-around feature when exceeding the start/end position of the menu</li>
             <li><b>Menu Items:</b> A list of all menu items managed by this menu</li>
         </ul>
@@ -80,4 +81,4 @@ This <b>Menu Input</b> component will read the input from the Unity Input System
 
 ## Demo
 ![Demo Scene](https://i.imgur.com/IAc8pEM.png)
-This library includes a demo scene that shows you how to create both vertical and horizontal menus. It also includes different menus using different features available in the library. There's a <b>Input</b> directory that contains an <b>InputActions</b> file that should be perfect for your game
+This library includes a demo scene that shows you how to create vertical, horizontal and tabbed menus. It also includes different menus using different features available in the library. There's a <b>Input</b> directory that contains an <b>InputActions</b> file that should be perfect for your game
