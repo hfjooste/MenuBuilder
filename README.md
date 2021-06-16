@@ -40,6 +40,55 @@ This library includes demo input actions that should be perfect for any game. If
 
 <i>Please refer to the official Unity documentation for more information: https://docs.unity3d.com/Packages/com.unity.inputsystem@1.0/manual/QuickStartGuide.html</i>
 
+## Default input
+<table>
+    <tr>
+        <th>Action</th>
+        <th>Keyboard</th>
+        <th>Controller</th>
+    </tr>
+    <tr>
+        <td>Navigate Up</td>
+        <td>Up Arrow<br/>W Key</td>
+        <td>Left Stick Up<br/>D-Pad Up</td>
+    </tr>
+    <tr>
+        <td>Navigate Down</td>
+        <td>Down Arrow<br/>S Key</td>
+        <td>Left Stick Down<br/>D-Pad Down</td>
+    </tr>
+    <tr>
+        <td>Navigate Left</td>
+        <td>Left Arrow<br/>A Key</td>
+        <td>Left Stick Left<br/>D-Pad Left</td>
+    </tr>
+    <tr>
+        <td>Navigate Right</td>
+        <td>Right Arrow<br/>D Key</td>
+        <td>Left Stick Right<br/>D-Pad Right</td>
+    </tr>
+    <tr>
+        <td>Tab Previous</td>
+        <td>Q Key<br/>Page Down</td>
+        <td>Left Trigger</td>
+    </tr>
+    <tr>
+        <td>Tab Next</td>
+        <td>E Key<br/>Page Up</td>
+        <td>Right Trigger</td>
+    </tr>
+    <tr>
+        <td>Select</td>
+        <td>Enter Key</td>
+        <td>South Button</td>
+    </tr>
+    <tr>
+        <td>Cancel/Back</td>
+        <td>Escape Key</td>
+        <td>East Button</td>
+    </tr>
+</table><br/>
+
 ## Handling input inside the scene
 ![Menu Input](https://i.imgur.com/lhuG8YP.png)
 <ol>
@@ -80,6 +129,17 @@ This <b>Menu Input</b> component will read the input from the Unity Input System
 
 <i>Remember to add the menu item to the menu. Otherwise no events will be invoked</i>
 
+## Creating input indicators
+![Menu Indicators](https://i.imgur.com/MkEklFe.png)
+<ol>
+    <li>Add a new empty game object to your scene</li>
+    <li>Add a <b>Menu Device Monitor</b> component to this new game object</li>
+    <li>Create device indicators for all the controllers/input devices you support</li>
+    <li>Specify all the device indicators in the <b>Menu Device Monitor</b> component</li>
+</ol>
+
+<i>The Menu Device Monitor requires an instance of Menu Input in the same scene</i>
+
 ## Demo
 ![Demo Scene](https://i.imgur.com/IAc8pEM.png)
-This library includes a demo scene that shows you how to create vertical, horizontal and tabbed menus. It also includes different menus using different features available in the library. There's a <b>Input</b> directory that contains an <b>InputActions</b> file that should be perfect for your game
+This library includes a demo scene that shows you how to create vertical, horizontal and tabbed menus. It also includes different menus using different features available in the library (including device/input indicators). There's a <b>Input</b> directory that contains an <b>InputActions</b> file that should be perfect for your game
