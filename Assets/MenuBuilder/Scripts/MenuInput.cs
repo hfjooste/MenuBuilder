@@ -1,3 +1,5 @@
+using UnityEngine.InputSystem;
+
 namespace ThirdPixelGames.MenuBuilder
 {
     using UnityEngine;
@@ -9,6 +11,11 @@ namespace ThirdPixelGames.MenuBuilder
     public class MenuInput : MonoBehaviour
     {
         #region Public Events
+        /// <summary>
+        /// Invoked after receiving any input event from the Input System
+        /// </summary>
+        [HideInInspector] public UnityEvent<InputDevice> onInputReceived = new UnityEvent<InputDevice>();
+        
         /// <summary>
         /// Invoked whenever we receive an up input event from the Input System
         /// </summary>
@@ -107,20 +114,36 @@ namespace ThirdPixelGames.MenuBuilder
             _input.Enable();
 
             // Monitor for input events received from the Input System
-            _input.Menu.Vertical.performed += input => InvokeEvent(onMenuDown, onMenuUp, input.ReadValue<float>());
-            _input.Menu.Horizontal.performed += input => InvokeEvent(onMenuLeft, onMenuRight, input.ReadValue<float>());
-            _input.Menu.Select.performed += _ => onMenuSelected?.Invoke();
-            _input.Menu.Cancel.performed += _ => onMenuCanceled?.Invoke();
-            _input.Menu.Tabs.performed += input => InvokeEvent(onMenuTabLeft, onMenuTabRight, input.ReadValue<float>());
+            _input.Menu.Vertical.performed += input =>
+                InvokeEvent(input.control.device, onMenuDown, onMenuUp, input.ReadValue<float>());
+            _input.Menu.Horizontal.performed += input =>
+                InvokeEvent(input.control.device, onMenuLeft, onMenuRight, input.ReadValue<float>());
+            _input.Menu.Select.performed += input => InvokeEvent(input.control.device, onMenuSelected);
+            _input.Menu.Cancel.performed += input => InvokeEvent(input.control.device, onMenuCanceled);
+            _input.Menu.Tabs.performed += input =>
+                InvokeEvent(input.control.device, onMenuTabLeft, onMenuTabRight, input.ReadValue<float>());
+        }
+
+        /// <summary>
+        /// Invoke the event after receiving input from the Input System
+        /// </summary>
+        private void InvokeEvent(InputDevice device, UnityEvent inputEvent)
+        {
+            // Invoke the specified event
+            inputEvent?.Invoke();
+            
+            // Invoke the input received event
+            onInputReceived?.Invoke(device);
         }
 
         /// <summary>
         /// Invoke the correct input event based on the input received from the Input System
         /// </summary>
+        /// <param name="device">The current input device used by the player</param>
         /// <param name="negativeEvent">The event to invoke if we receive a negative input value</param>
         /// <param name="positiveEvent">The event to invoke if we receive a positive input value</param>
         /// <param name="input">The input received from the Input System</param>
-        private void InvokeEvent(UnityEvent negativeEvent, UnityEvent positiveEvent, float input)
+        private void InvokeEvent(InputDevice device, UnityEvent negativeEvent, UnityEvent positiveEvent, float input)
         {
             // Check if we have a value to process
             if (input == 0)
@@ -140,6 +163,9 @@ namespace ThirdPixelGames.MenuBuilder
                 // Invoke the negative event
                 negativeEvent?.Invoke();
             }
+            
+            // Invoke the input received event
+            onInputReceived?.Invoke(device);
         }
         #endregion
     }
