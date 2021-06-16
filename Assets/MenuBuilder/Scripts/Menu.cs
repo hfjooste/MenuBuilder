@@ -134,6 +134,22 @@ namespace ThirdPixelGames.MenuBuilder
 
         #region Public Methods
         /// <summary>
+        /// Set the selected index and update the menu items
+        /// </summary>
+        /// <param name="selectedIndex">The new selected index</param>
+        public void SetSelectedIndex(int selectedIndex)
+        {
+            // Set the selected index
+            _selectedIndex = Mathf.Clamp(selectedIndex, 0, menuItems.Length - 1);
+            
+            // Update the menu items
+            UpdateMenuItems();
+            
+            // Force the new selection
+            OnMenuSelected();
+        }
+        
+        /// <summary>
         /// Enable/Disable the menu
         /// </summary>
         /// <param name="isActive">A boolean value indicating if the menu is enabled/disabled</param>
