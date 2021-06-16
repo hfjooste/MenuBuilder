@@ -18,6 +18,12 @@ namespace ThirdPixelGames.MenuBuilder
         /// </summary>
         [Tooltip("The type of menu (horizontal, vertical or tabs)")]
         public MenuStyle menuStyle;
+
+        /// <summary>
+        /// Reset the selected index after loading the menu
+        /// </summary>
+        [Tooltip("Reset the selected index after loading the menu")]
+        public bool resetIndexAfterLoading = true;
         
         /// <summary>
         /// A boolean value indicating if the menu supports wrap-around input
@@ -107,8 +113,12 @@ namespace ThirdPixelGames.MenuBuilder
             _input.onMenuTabLeft.AddListener(OnMenuTabLeft);
             _input.onMenuTabRight.AddListener(OnMenuTabRight);
 
-            // Reset the selected index
-            _selectedIndex = 0;
+            // Check if we need to reset the selected index
+            if (resetIndexAfterLoading)
+            {
+                // Reset the selected index
+                _selectedIndex = 0;   
+            }
             
             // Update the menu items
             UpdateMenuItems();
