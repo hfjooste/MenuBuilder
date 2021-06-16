@@ -11,6 +11,16 @@ namespace ThirdPixelGames.MenuBuilder
     {
         #region Public Events
         /// <summary>
+        /// This event is invoked when the object becomes enabled and active
+        /// </summary>
+        public UnityEvent onEnable = new UnityEvent();
+        
+        /// <summary>
+        /// This event is invoked when the behaviour becomes disabled
+        /// </summary>
+        public UnityEvent onDisable = new UnityEvent();
+        
+        /// <summary>
         /// Invoked whenever the item is activated (got focus)
         /// </summary>
         [FormerlySerializedAs("Activated")]
@@ -27,6 +37,18 @@ namespace ThirdPixelGames.MenuBuilder
         /// </summary>
         [FormerlySerializedAs("Selected")]
         public UnityEvent selected = new UnityEvent();
+        #endregion
+        
+        #region Unity Methods
+        /// <summary>
+        /// This function is called when the object becomes enabled and active
+        /// </summary>
+        private void OnEnable() => onEnable?.Invoke();
+
+        /// <summary>
+        /// This function is called when the behaviour becomes disabled
+        /// </summary>
+        private void OnDisable() => onDisable?.Invoke();
         #endregion
     }
 }

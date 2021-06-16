@@ -77,7 +77,7 @@ namespace ThirdPixelGames.MenuBuilder
         }
 
         /// <summary>
-        /// This function is called when the object becomes enabled and active
+        /// This function is called when the behaviour becomes disabled
         /// </summary>
         private void OnDisable()
         {
@@ -96,7 +96,7 @@ namespace ThirdPixelGames.MenuBuilder
         }
 
         /// <summary>
-        /// This function is called when the behaviour becomes disabled
+        /// This function is called when the object becomes enabled and active
         /// </summary>
         private void OnEnable()
         {
