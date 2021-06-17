@@ -10,6 +10,13 @@
     {
         #region Public Variables
         /// <summary>
+        /// Log out the device name whenever we receive input
+        /// </summary>
+        [Header("Properties")]
+        [Tooltip("Log out the device name whenever we receive input")]
+        public bool debugMode;
+        
+        /// <summary>
         /// A list of all keyboard indicators
         /// </summary>
         [Header("References")]
@@ -82,23 +89,33 @@
             // Add an input listener
             _input.onInputReceived.AddListener(OnInputReceived);
             
-            // Hide all the indicators
-            ToggleIndicatorVisibility(ref keyboardIndicators, false);
-            ToggleIndicatorVisibility(ref xboxIndicators, false);
-            ToggleIndicatorVisibility(ref playStationIndicators, false);
-            ToggleIndicatorVisibility(ref nintendoSwitchIndicators, false);
-            ToggleIndicatorVisibility(ref genericControllerIndicators, false);
+            // Show the default indicators
+#if UNITY_EDITOR || UNITY_STANDALONE
+            UpdateIndicators(ref keyboardIndicators);
+#elif UNITY_XBOXONE
+            UpdateIndicators(ref xboxIndicators);
+#elif UNITY_PS4
+            UpdateIndicators(ref playStationIndicators);
+#elif UNITY_SWITCH
+            UpdateIndicators(ref nintendoSwitchIndicators);
+#endif
         }
         #endregion
         
         #region Private Methods
-
         /// <summary>
         /// Invoked after receiving any input event from the Input System
         /// </summary>
         /// <param name="inputDevice">The current input device used by the user</param>
         private void OnInputReceived(InputDevice inputDevice)
         {
+            // Check if we should log this event
+            if (debugMode)
+            {
+                // Log out the device name
+                Debug.Log(inputDevice.name);
+            }
+            
             // Check if we're using a keyboard
             if (inputDevice.name.ToLower().Contains("keyboard"))
             {
